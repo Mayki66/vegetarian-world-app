@@ -84,7 +84,7 @@ export default function VegetarianWorldTable() {
   }, [favorites]);
 
   const toggleFavorite = (dishName: string) => {
-    setFavorites(prev =>
+    setFavorites((prev: string[]) =>
       prev.includes(dishName)
         ? prev.filter(name => name !== dishName)
         : [...prev, dishName]
