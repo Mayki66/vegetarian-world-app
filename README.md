@@ -14,6 +14,8 @@ Un tableau filtrable et dynamique pour explorer des plats végétariens classés
 
 📦 Exportez le tableau en CSV — ou imprimez-le
 
+➕ Ajoutez vous-même vos recettes 🌱
+
 ---
 
 ## 📸 Démo en ligne
@@ -31,7 +33,7 @@ Un tableau filtrable et dynamique pour explorer des plats végétariens classés
 - 📥 Export du tableau en CSV
 - 🖨️ Impression PDF
 - 🌒 Dark mode toggle
-- ➕ (à venir) Ajout manuel de recettes
+- ➕ Ajout manuel de recettes depuis une modale (formulaire)
 
 ---
 
@@ -66,22 +68,26 @@ http://localhost:3000
 vegetarian-world-app/
 ├── app/
 │   └── tableau/         # Composant principal (tableau)
-├── components/ui/       # Composants UI (Table, Button...)
+├── components/ui/       # Composants UI (Table, Button, Modal...)
+├── lib/                 # Fichiers utilitaires (données, validation de lien)
 ├── public/              # Fichiers statiques (favicon...)
-├── lib/                 # Fichiers utilitaires (ex : validation de lien)
 ├── tailwind.config.js   # Configuration de Tailwind CSS
 └── ...
 ```
 
 ---
 
-## 📌 Roadmap (à venir)
+## 🧭 Roadmap (à venir)
 
-- [ ] Ajout manuel de recette via un formulaire
-- [ ] Validation automatique des liens
-- [ ] Ajout d’un mode édition/suppression
-- [ ] Visuels ou drapeaux des pays
-- [ ] Ajout d’API nutritionnelles ou de labels
+- [x] Ajouter le bouton "Ajouter une recette manuellement"
+- [x] Permettre d’ajouter une recette depuis un formulaire
+- [ ] Intégrer la vérification de lien automatiquement
+- [x] Organiser tes données dans un fichier dishes.json
+- [ ] Faire un système de sauvegarde/export de recettes (CSV ou localStorage)
+- [ ] Ajouter un vrai dark mode toggle (amélioré)
+- [ ] Ajouter des visuels / drapeaux pour chaque pays
+- [ ] Ajouter une page pour les ingrédients que nous avons déjà
+- [ ] Ajouter un tableau qui fera des recettes en fonctions des ingrédients que nous avons déjà
 
 ---
 
