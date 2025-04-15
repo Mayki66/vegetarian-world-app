@@ -16,6 +16,8 @@ Un tableau filtrable et dynamique pour explorer des plats végétariens classés
 
 ➕ Ajoutez vous-même vos recettes 🌱
 
+🔗 Accédez à une **page dédiée** pour chaque plat : infos détaillées, ingrédients, lien externe...
+
 ---
 
 ## 📸 Démo en ligne
@@ -34,13 +36,7 @@ Un tableau filtrable et dynamique pour explorer des plats végétariens classés
 - 🖨️ Impression PDF
 - 🌒 Dark mode toggle
 - ➕ Ajout manuel de recettes depuis une modale (formulaire)
-- 🧾 Affichage d’une page dédiée à chaque recette avec :
-  - Nom du plat
-  - Pays d'origine
-  - Type(s) de glucides ou protéines
-  - Liste des ingrédients (en fonction du nombre de personnes, si dispo)
-  - Étapes détaillées de préparation
-  - Lien source vers la recette externe
+- 🧾 Détail d’un plat accessible via une page dédiée `/plat/[nom-du-plat]`
 
 ---
 
@@ -75,7 +71,7 @@ http://localhost:3000
 vegetarian-world-app/
 ├── app/
 │   ├── tableau/         # Composant principal (tableau)
-│   └── plat/[slug]/     # Pages individuelles pour chaque recette
+│   └── plat/            # Pages individuelles pour chaque plat
 ├── components/ui/       # Composants UI (Table, Button, Modal...)
 ├── lib/                 # Fichiers utilitaires (données, validation de lien)
 ├── public/              # Fichiers statiques (favicon...)
@@ -96,16 +92,8 @@ vegetarian-world-app/
 - [ ] Ajouter des visuels / drapeaux pour chaque pays
 - [ ] Ajouter une page pour les ingrédients que nous avons déjà
 - [ ] Ajouter un tableau qui fera des recettes en fonctions des ingrédients que nous avons déjà
-- [ ] 🧾 Lier chaque plat à une page dédiée sur le site avec détails (ingrédients, préparation, lien source)
-
----
-
-## 📱 Optimisation mobile (prochaine étape)
-
-- [ ] Rendre la grille de filtres responsive
-- [ ] Affichage mobile du tableau avec scroll horizontal
-- [ ] Optimiser l’expérience sur petits écrans
-- [ ] Ajouter un bouton de retour rapide en haut de page
+- [ ] **Créer une page dédiée pour chaque plat avec nom, ingrédients, recette et lien source**
+- [ ] **Créer une version mobile optimisée avec navigation adaptée et filtres responsive**
 
 ---
 
