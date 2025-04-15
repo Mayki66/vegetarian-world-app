@@ -34,6 +34,13 @@ Un tableau filtrable et dynamique pour explorer des plats végétariens classés
 - 🖨️ Impression PDF
 - 🌒 Dark mode toggle
 - ➕ Ajout manuel de recettes depuis une modale (formulaire)
+- 🧾 Affichage d’une page dédiée à chaque recette avec :
+  - Nom du plat
+  - Pays d'origine
+  - Type(s) de glucides ou protéines
+  - Liste des ingrédients (en fonction du nombre de personnes, si dispo)
+  - Étapes détaillées de préparation
+  - Lien source vers la recette externe
 
 ---
 
@@ -67,7 +74,8 @@ http://localhost:3000
 ```
 vegetarian-world-app/
 ├── app/
-│   └── tableau/         # Composant principal (tableau)
+│   ├── tableau/         # Composant principal (tableau)
+│   └── plat/[slug]/     # Pages individuelles pour chaque recette
 ├── components/ui/       # Composants UI (Table, Button, Modal...)
 ├── lib/                 # Fichiers utilitaires (données, validation de lien)
 ├── public/              # Fichiers statiques (favicon...)
@@ -88,17 +96,16 @@ vegetarian-world-app/
 - [ ] Ajouter des visuels / drapeaux pour chaque pays
 - [ ] Ajouter une page pour les ingrédients que nous avons déjà
 - [ ] Ajouter un tableau qui fera des recettes en fonctions des ingrédients que nous avons déjà
+- [ ] 🧾 Lier chaque plat à une page dédiée sur le site avec détails (ingrédients, préparation, lien source)
 
-### 📱 Optimisation mobile (à venir)
+---
 
-- [ ] Ajouter un scroll horizontal fluide pour le tableau (`overflow-x-auto`)
-- [ ] Adapter la taille des polices sur petits écrans (`text-sm`, `md:text-base`)
-- [ ] Repenser l'ordre des filtres sur mobile (Continent > Glucide > Recherche > Boutons)
-- [ ] Optimiser les marges et espacements pour une meilleure lisibilité
-- [ ] Améliorer l’accessibilité du bouton "Ajouter une recette"
-- [ ] Tester les formulaires pour clavier mobile (focus, padding...)
-- [ ] Ajouter un dark mode toggle mobile-friendly
-- [ ] Préparer une version PWA (Progressive Web App)
+## 📱 Optimisation mobile (prochaine étape)
+
+- [ ] Rendre la grille de filtres responsive
+- [ ] Affichage mobile du tableau avec scroll horizontal
+- [ ] Optimiser l’expérience sur petits écrans
+- [ ] Ajouter un bouton de retour rapide en haut de page
 
 ---
 
