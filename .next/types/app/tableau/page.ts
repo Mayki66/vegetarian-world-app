@@ -1,4 +1,4 @@
-// File: F:\Download\Code\vegetarian-world-app-complet\app\tableau\page.tsx
+// File: D:\Download\Code\vegetarian-world-app-1\app\tableau\page.tsx
 import * as entry from '../../../../app/tableau/page.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

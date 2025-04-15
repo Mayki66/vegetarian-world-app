@@ -1,4 +1,4 @@
-// File: F:\Download\Code\vegetarian-world-app-complet\app\layout.tsx
+// File: D:\Download\Code\vegetarian-world-app-1\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

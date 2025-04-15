@@ -2,14 +2,30 @@
 
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Star, StarOff } from "lucide-react";
 import AddRecipeModal from "@/components/ui/add-recipe-modal";
-import { vegetarianDishes as initialDishes } from "@/lib/dishes";
+import { vegetarianDishes as initialDishes } from "@/data/dishes";
+import Link from "next/link";
+import { ROUTES } from "@/lib/routes";
+import type { Dish } from "@/lib/types";
 
 export default function VegetarianWorldTable() {
   const [selectedContinent, setSelectedContinent] = useState("Tous");
@@ -21,9 +37,8 @@ export default function VegetarianWorldTable() {
     }
     return [];
   });
-  const [dishes, setDishes] = useState(initialDishes);
 
-  const continents = ["Tous", ...Array.from(new Set(initialDishes.map((d) => d.continent)))];
+  const continents = ["Tous", ...new Set(initialDishes.map((d) => d.continent))];
   const allCarbs = Array.from(new Set(initialDishes.flatMap((d) => d.carbs)));
   const carbs = ["Tous", ...allCarbs];
 
@@ -33,13 +48,17 @@ export default function VegetarianWorldTable() {
 
   const toggleFavorite = (dishName: string) => {
     setFavorites((prev) =>
-      prev.includes(dishName) ? prev.filter((name) => name !== dishName) : [...prev, dishName]
+      prev.includes(dishName)
+        ? prev.filter((name) => name !== dishName)
+        : [...prev, dishName]
     );
   };
 
-  const filteredDishes = dishes.filter((dish) => {
-    const matchesContinent = selectedContinent === "Tous" || dish.continent === selectedContinent;
-    const matchesCarb = selectedCarb === "Tous" || dish.carbs.includes(selectedCarb);
+  const filteredDishes = initialDishes.filter((dish) => {
+    const matchesContinent =
+      selectedContinent === "Tous" || dish.continent === selectedContinent;
+    const matchesCarb =
+      selectedCarb === "Tous" || dish.carbs.includes(selectedCarb);
     const searchLower = searchTerm.toLowerCase();
     const matchesSearch =
       dish.dish.toLowerCase().includes(searchLower) ||
@@ -47,12 +66,17 @@ export default function VegetarianWorldTable() {
     return matchesContinent && matchesCarb && matchesSearch;
   });
 
-  const handleExportCSV = () => {
+  const handleExportExcel = () => {
     const csvContent = [
       ["Pays", "Plat", "Glucides", "Lien de recette"],
-      ...filteredDishes.map((d) => [d.country, d.dish, d.carbs.join(" / "), d.recipe]),
+      ...filteredDishes.map((d) => [
+        d.country,
+        d.dish,
+        d.carbs.join(" / "),
+        `${ROUTES.dish(d.slug)}`,
+      ]),
     ]
-      .map((row) => row.map((cell) => `"${cell}"`).join(","))
+      .map((e) => e.map((v) => `"${v}"`).join(","))
       .join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -64,10 +88,8 @@ export default function VegetarianWorldTable() {
     document.body.removeChild(link);
   };
 
-  const handlePrint = () => window.print();
-
-  const handleAddRecipe = (newRecipe: any) => {
-    setDishes((prev) => [...prev, newRecipe]);
+  const handlePrint = () => {
+    window.print();
   };
 
   return (
@@ -75,30 +97,38 @@ export default function VegetarianWorldTable() {
       <CardContent>
         <h1 className="text-2xl font-bold mb-4">Plats végétariens du monde</h1>
 
-        <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-center md:flex-wrap">
-          <div className="flex items-center gap-2">
-            <label className="font-medium whitespace-nowrap">Continent :</label>
+        <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-center">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center">
+            <label className="font-medium md:mr-2 md:whitespace-nowrap">
+              Continent :
+            </label>
             <Select onValueChange={setSelectedContinent} defaultValue="Tous">
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Continent" />
               </SelectTrigger>
               <SelectContent>
                 {continents.map((c, i) => (
-                  <SelectItem key={i} value={c}>{c}</SelectItem>
+                  <SelectItem key={i} value={c}>
+                    {c}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
 
-          <div className="flex items-center gap-2">
-            <label className="font-medium whitespace-nowrap">Glucide :</label>
+          <div className="flex flex-col gap-2 md:flex-row md:items-center">
+            <label className="font-medium md:mr-2 md:whitespace-nowrap">
+              Glucide :
+            </label>
             <Select onValueChange={setSelectedCarb} defaultValue="Tous">
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Glucide" />
               </SelectTrigger>
               <SelectContent>
                 {carbs.map((c, i) => (
-                  <SelectItem key={i} value={c}>{c}</SelectItem>
+                  <SelectItem key={i} value={c}>
+                    {c}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -116,10 +146,10 @@ export default function VegetarianWorldTable() {
             <Button onClick={handlePrint} variant="outline">
               🖨️ Imprimer / PDF
             </Button>
-            <Button onClick={handleExportCSV} variant="outline">
-              📀 Export CSV
+            <Button onClick={handleExportExcel} variant="outline">
+              💾 Export Excel
             </Button>
-            <AddRecipeModal onAdd={handleAddRecipe} />
+            <AddRecipeModal />
           </div>
         </div>
 
@@ -129,13 +159,16 @@ export default function VegetarianWorldTable() {
               <TableHead>⭐</TableHead>
               <TableHead>Pays</TableHead>
               <TableHead>Plat</TableHead>
-              <TableHead>Glucides principaux</TableHead>
+              <TableHead>Glucides</TableHead>
               <TableHead>Recette</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredDishes.map((dish, index) => (
-              <TableRow key={index} className={favorites.includes(dish.dish) ? "bg-yellow-50" : ""}>
+              <TableRow
+                key={index}
+                className={favorites.includes(dish.dish) ? "bg-yellow-50" : ""}
+              >
                 <TableCell>
                   <Button
                     variant="ghost"
@@ -151,20 +184,18 @@ export default function VegetarianWorldTable() {
                 </TableCell>
                 <TableCell>{dish.country}</TableCell>
                 <TableCell>{dish.dish}</TableCell>
-                <TableCell className="flex flex-wrap gap-2">
-                  {dish.carbs.map((carb: string, i: number) => (
+                <TableCell className="flex gap-2 flex-wrap">
+                  {dish.carbs.map((carb, i) => (
                     <Badge key={i}>{carb}</Badge>
                   ))}
                 </TableCell>
                 <TableCell>
-                  <a
-                    href={dish.recipe}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href={ROUTES.dish(dish.slug)}
                     className="text-blue-600 hover:underline"
                   >
                     Voir la recette
-                  </a>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
