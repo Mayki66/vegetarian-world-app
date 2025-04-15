@@ -89,6 +89,17 @@ vegetarian-world-app/
 - [ ] Ajouter une page pour les ingrédients que nous avons déjà
 - [ ] Ajouter un tableau qui fera des recettes en fonctions des ingrédients que nous avons déjà
 
+### 📱 Optimisation mobile (à venir)
+
+- [ ] Ajouter un scroll horizontal fluide pour le tableau (`overflow-x-auto`)
+- [ ] Adapter la taille des polices sur petits écrans (`text-sm`, `md:text-base`)
+- [ ] Repenser l'ordre des filtres sur mobile (Continent > Glucide > Recherche > Boutons)
+- [ ] Optimiser les marges et espacements pour une meilleure lisibilité
+- [ ] Améliorer l’accessibilité du bouton "Ajouter une recette"
+- [ ] Tester les formulaires pour clavier mobile (focus, padding...)
+- [ ] Ajouter un dark mode toggle mobile-friendly
+- [ ] Préparer une version PWA (Progressive Web App)
+
 ---
 
 ## 👤 Auteur
